@@ -19,7 +19,6 @@ function apiCall(requestUrl) {
         .then(function (data) {
             console.log(data);
             movieTitle.textContent = data.results[0].title
-            console.log(movieTitle);
             moviePoster.innerHTML = `<img src="${data.results[0].image}" width="200" height="300">`
             var movieId = data.results[0].id
             fetch(`https://imdb-api.com/API/Ratings/k_jisxuuy3/${movieId}`)
@@ -35,6 +34,12 @@ function apiCall(requestUrl) {
                 })
         })
     }
+
+function init() {
+    for (var i = 0; i < curatedMovies; i++) {
+        
+    }
+}
 
 console.log(apiUrl);
 apiCall(apiUrl);
