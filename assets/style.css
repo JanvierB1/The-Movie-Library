@@ -7,7 +7,7 @@
     padding: 10px;
     font-size: 17px;
     border: 1px solid grey;
-    float: right;
+    float: left;
     width: 80%;
     background: #f1f1f1;
   }
@@ -26,7 +26,7 @@
   }
   
   form.example button:hover {
-    background: pink;
+    background: silver;
   }
   
   /* Clear floats */
