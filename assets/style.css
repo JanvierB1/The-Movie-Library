@@ -36,9 +36,37 @@
     display: table;
   }
 
+#main-div {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: space-evenly;
+
+}
+
 .movies{
-    border: 2px solid black;
-    height: 150px;
-    width: 100px;
-    margin: 10px;
+    display: inline-block;
+    position:static;
+    width: fit-content;
+    max-width: 150px;
+    height: fit-content;
+    padding: 2px;
+    margin: 10px 10px 35px 10px;
+    background-color: white;
+}
+
+.movie-poster {
+  height: 225px;
+  width: 150px;
+}
+
+.movie-titles {
+  position:relative;
+  font-weight: bold;
+  text-align: center;
+}
+
+.movies:hover {
+  transform: scale(1.25);
+  transition: 0.3s;
 }
