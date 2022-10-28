@@ -118,9 +118,6 @@ function init() {
     }
 }
 
-console.log(apiUrl);
-apiCall(apiUrl);
-
 
 var requestUrl = `https://api.nytimes.com/svc/movies/v2/reviews/search.json?&api-key=R0eFfTq42Mk2pofP6Ums8HKtAedFJequ`
 
@@ -147,7 +144,7 @@ function apiCall(requestUrl) {
                         } 
                     }
                     console.log(title);
-                    console.log(rating)
+                    console.log(rating);
                 })
         })
     }
