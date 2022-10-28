@@ -1,4 +1,9 @@
+// CREDITS
+// button component from: https://tailwindcomponents.com/component/button-component-default
+// modal component from: https://tailwindcomponents.com/component/two-very-simple-modals
+
 var mainDiv = $('#main-div');
+var bodyEl = $('body');
 
 // var movieName = ''
 // var apiUrl = `https://imdb-api.com/en/API/SearchMovie/k_jisxuuy3/${movieName}`
@@ -103,6 +108,7 @@ function init() {
         var posterEl = $('<img>');
         posterEl.addClass('movie-poster');
         posterEl.attr("src", curatedMovies[i].poster);
+        posterEl.attr("alt-text", curatedMovies[i].title);
         var titleEl = $('<p>');
         titleEl.addClass('movie-titles');
         titleEl.text(curatedMovies[i].title);
@@ -114,4 +120,25 @@ function init() {
 
 if (document.location.pathname == "/index.html") {
     init();
+}
+
+// THIS HAS TO BE HERE OTHERWISE IT DOESN'T SELECT THE MOVIES SINCE THEY'RE NOT GENERATED BEFORE THIS POINT
+var movieEl = $('.movie-poster');
+// ...
+
+// CLICK EVENT FOR MOVIES ON MAIN PAGE
+movieEl.on('click', function(event) {
+    var element = event.target;
+    var mPoster = $(this).attr('src');
+    var mTitle = $(this).attr('alt-text');
+    openModal(mTitle, mPoster);
+})
+
+// MODAL OPENING FUNCTION
+function openModal(title, poster) {
+    bodyEl.attr('x-data', "{showModal2: true}")
+    var mtitleEl = $('#modal-title')
+    var mposterEl = $('#modal-poster')
+    mtitleEl.text(title);
+    mposterEl.attr("src", poster);
 }

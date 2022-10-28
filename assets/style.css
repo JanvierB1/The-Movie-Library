@@ -36,6 +36,7 @@
     display: table;
   }
 
+  /* The container with ALL the movie containers on the main page  */
 #main-div {
     display: flex;
     flex-direction: row;
@@ -44,7 +45,8 @@
 
 }
 
-.movies{
+/* Style the movie container (front page) */
+.movies {
     display: inline-block;
     position:static;
     width: fit-content;
@@ -55,18 +57,37 @@
     background-color: white;
 }
 
+/* style the poster on the movies (front page) */
 .movie-poster {
   height: 225px;
   width: 150px;
 }
 
+/* Movie poster on the modal */
+.movie-posterlg {
+  height: 615px;
+  width: 400px;
+}
+
+/* style the text under the movie posters */
 .movie-titles {
   position:relative;
   font-weight: bold;
   text-align: center;
 }
 
+/* Hover effect for the front page */
 .movies:hover {
   transform: scale(1.25);
   transition: 0.3s;
+}
+
+/* Title on the modal  */
+#modal-title {
+  margin-bottom: 10px;
+}
+
+/* Text below the title on the modal */
+.modal-below-text {
+  padding: 3px;
 }
