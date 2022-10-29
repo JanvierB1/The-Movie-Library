@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="Stylesheet" href="./assets/style.css">
+    <title>Movie Library</title>
+</head>
+<body>
+    <div class="min-h-full">
+        <nav class="bg-blue-800">
+          <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div class="flex h-16 items-center justify-between">
+              <div class="flex items-center">
+                <div class="flex-shrink-0">
+                  <img class="h-12 w-12" src="./assets/images/movie.png" alt="Your Company">
+                </div>
+                <div class="hidden md:block">
+                  <div class="ml-10 flex items-baseline space-x-4">
+                    <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+                    <a href="./index.html" class="text-green-300 hover:bg-red-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium" aria-current="page">Home</a>
+      
+                    <a href="./Mymovies.html" class="text-green-300 hover:bg-red-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">My Movies</a>
+                    <!-- Load icon library -->
+
+      
+                  </div>
+                </div>
+              </div>
+              <div class="hidden md:block">
+                <div class="ml-4 flex items-center md:ml-6">
+                    <div class="searchbar">
+                      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+                      <!-- The form -->
+                      <form class="example" action="action_page.php">
+                        <input type="text" placeholder="Search.." name="search">
+                        <button type="submit"><i class="fa fa-search"></i></button>
+                      </form>
+                </div>
+                  </div>
+                </div>
+              </div>
+              
+            </div>
+          </div>
+      
+          <!-- Mobile menu, show/hide based on menu state. -->
+          <div class="md:hidden" id="mobile-menu">
+            <div class="space-y-1 px-2 pt-2 pb-3 sm:px-3">
+              <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+              <a href="./index.html" class="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium" aria-current="page">Home</a>
+      
+              <a href="./Mymovies.html" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">My movies</a>
+      
+            </div>
+          </div>
+        </nav>
+      
+        <header class="bg-white shadow">
+          <div class="mx-auto max-w-7xl py-6 px-4 sm:px-6 lg:px-8">
+            <h1 class="text-3xl font-bold tracking-tight text-gray-900">Movie Library</h1>
+          </div>
+        </header>
+        <main>
+          <!-- add main content of this page -->
+        </main>
+</body>
+</html>
