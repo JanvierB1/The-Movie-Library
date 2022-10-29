@@ -42,7 +42,6 @@
     flex-direction: row;
     flex-wrap: wrap;
     align-content: space-evenly;
-
 }
 
 /* Style the movie container (front page) */
@@ -90,4 +89,54 @@
 /* Text below the title on the modal */
 .modal-below-text {
   padding: 3px;
+}
+
+/* For centering all the items at the bottom of the modal  */
+.modal-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#search-modal-div {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: space-evenly;
+}
+
+.search-movies {
+  display: inline-block;
+  position:static;
+  height: fit-content;
+  width: 150px;
+  padding: 2px;
+  margin: 10px 10px 35px 10px;
+  background-color: white;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.search-poster {
+  height: 225px;
+  width: 150px;
+}
+
+.below-search-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  height:fit-content;
+}
+
+#search-modal-container {
+  height: fit-content;
+}
+
+.tracker-buttons {
+  align-self:flex-end;
 }
