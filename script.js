@@ -149,9 +149,9 @@ function apiCall(requestUrl) {
         })
     }
 
-if (document.location.pathname == "/index.html") {
+// if (document.location.pathname == "/index.html") {
     init();
-}
+//}//
 
 // THIS HAS TO BE HERE OTHERWISE IT DOESN'T SELECT THE MOVIES SINCE THEY'RE NOT GENERATED BEFORE THIS POINT
 var movieEl = $('.movie-poster');
