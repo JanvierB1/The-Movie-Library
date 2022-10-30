@@ -5,10 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
     <link rel="Stylesheet" href="./assets/style.css">
     <title>Movie Library</title>
 </head>
-<body>
+<body x-data="{ showModal1: false, showModal2: false}" :class="{'overflow-y-hidden': showModal1 || showModal2}">
     <div class="min-h-full">
         <nav class="bg-blue-800">
           <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -20,9 +21,10 @@
                 <div class="hidden md:block">
                   <div class="ml-10 flex items-baseline space-x-4">
                     <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-                    <a href="./index.html" class="text-green-300 hover:bg-red-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium" aria-current="page">Home</a>
-      
+                    <a href="./index.html" class="text-green-300 hover:bg-red-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Home</a>
+     
                     <a href="./Mymovies.html" class="text-green-300 hover:bg-red-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">My Movies</a>
+
                     <!-- Load icon library -->
 
       
@@ -35,15 +37,14 @@
                       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
                       <!-- The form -->
-                      <form class="example" action="action_page.php">
-                        <input type="text" placeholder="Search.." name="search">
-                        <button type="submit"><i class="fa fa-search"></i></button>
+                      <form class="example">
+                        <input type="text" placeholder="Search A Movie Name" name="movie-search">
+                        <button type="submit" id="search-button"><i class="fa fa-search"></i></button>
                       </form>
                 </div>
                   </div>
                 </div>
               </div>
-              
             </div>
           </div>
       
@@ -51,11 +52,11 @@
           <div class="md:hidden" id="mobile-menu">
             <div class="space-y-1 px-2 pt-2 pb-3 sm:px-3">
               <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-              <a href="./index.html" class="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium" aria-current="page">Home</a>
+              <a href="./index.html" class="bg-green-900 text-white block px-3 py-2 rounded-md text-base font-medium" aria-current="page">Home</a>
       
-              <a href="./Mymovies.html" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">My movies</a>
+              <a href="./Mymovies.html" class="text-green-900 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">My Movies</a>
       
-            </div>
+            </div>          
           </div>
         </nav>
       
@@ -65,7 +66,117 @@
           </div>
         </header>
         <main>
-          <!-- add main content of this page -->
+          <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
+            <!-- Replace with your content -->
+
+            <div class="px-4 py-6 sm:px-0">
+              <div class="rounded-lg border-4 border-double border-gray-500" class="border-box" id="main-div">
+
+                </div>
+              </div>
+            </div>
+    <!-- TESTING MODAL CODE -->
+    <!-- Modal2 -->
+    <div
+    class="fixed inset-0 w-full h-full z-20 bg-black bg-opacity-50 duration-300 overflow-y-auto"
+    x-show="showModal2"
+    x-transition:enter="transition duration-300"
+    x-transition:enter-start="opacity-0"
+    x-transition:enter-end="opacity-100"
+    x-transition:leave="transition duration-300"
+    x-transition:leave-start="opacity-100"
+    x-transition:leave-end="opacity-0"
+  >
+    <div class="relative sm:w-3/4 md:w-3/4 lg:w-3/4 mx-2 sm:mx-auto my-10 opacity-100">
+      <div
+        class="relative bg-white shadow-lg rounded-lg text-gray-900 z-20"
+        @click.away="showModal2 = false"
+        x-show="showModal2"
+        x-transition:enter="transition transform duration-300"
+        x-transition:enter-start="scale-0"
+        x-transition:enter-end="scale-100"
+        x-transition:leave="transition transform duration-300"
+        x-transition:leave-start="scale-100"
+        x-transition:leave-end="scale-0"
+      >
+        <div class="flex flex-col justify-center items-center p-3 text-black-600">
+              <!-- IMAGE AREA -->
+              <img src class="movie-posterlg" id="modal-poster" viewBox="0 0 20 20"></img>
+              <!-- ...IMAGE END... -->
+              <!-- TEXT AREA -->
+              <h2 class="font-semibold text-2xl" id="modal-title">Success</h2>
+              <div class="modal-text">
+                <p class="p-3 text-center modal-below-text">
+                <span id="age-rating"></span>
+                </p>
+                <!-- <button
+                  type="button"
+                  class="border border-green-500 bg-green-500 text-white rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-green-600 focus:outline-none focus:shadow-outline tracker-buttons" id="addtoTracker"
+                >Add to Tracker</button> -->
+                <!-- ...TEXT END... -->
+              </div>
+          </div>
+
+        </div>
+        <div >
+
+        </div>
+        <footer class="flex justify-center bg-transparent">
+          </button>
+        </footer>
+      </div>
+    </div>
+  </div>
+  <!-- END OF MODAL CODE -->
+  <!-- /End replace -->
+
+
+    <!-- START OF SEARCH MODAL -->
+    <!-- Modal1 -->
+    <div
+    class="fixed inset-0 w-full h-full z-20 bg-black bg-opacity-50 duration-300 overflow-y-auto"
+    x-show="showModal1"
+    x-transition:enter="transition duration-300"
+    x-transition:enter-start="opacity-0"
+    x-transition:enter-end="opacity-100"
+    x-transition:leave="transition duration-300"
+    x-transition:leave-start="opacity-100"
+    x-transition:leave-end="opacity-0"
+  >
+    <div class="relative sm:w-3/4 md:w-3/4 lg:w-3/4 mx-2 sm:mx-auto my-10 opacity-100" >
+      <div
+        class="relative bg-white shadow-lg rounded-md text-gray-900 z-20"
+        @click.away="showModal1 = false"
+        x-show="showModal1"
+        x-transition:enter="transition transform duration-300"
+        x-transition:enter-start="scale-0"
+        x-transition:enter-end="scale-100"
+        x-transition:leave="transition transform duration-300"
+        x-transition:leave-start="scale-100"
+        x-transition:leave-end="scale-0"
+        id="search-modal-container"
+      >
+        <header class="flex items-center justify-between p-2">
+          <h2 class="font-semibold place-self-center">Search Results</h2>
+          <button class="focus:outline-none p-2" @click="showModal1 = false">
+            <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+              <path
+                d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"
+              ></path>
+            </svg>
+          </button>
+        </header>
+        <div class="p-2 text-center" id="search-modal-div">
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- END OF SEARCH MODAL -->
+          </div>
         </main>
+      </div>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="./script.js"></script>
 </body>
 </html>
