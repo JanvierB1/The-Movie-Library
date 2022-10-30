@@ -6,10 +6,12 @@ var mainDiv = $('#main-div');
 var bodyEl = $('body');
 var searchBtn = $('#search-button')
 var searchContainer = $('#search-modal-div')
+var trackerBtn = $('.tracker-buttons')
 var movieName
 var movieTitle
 var apiUrl = `https://imdb-api.com/en/API/SearchMovie/k_dh9vu8yk/${movieName}`
 var nytRating
+var trackerMovies = []
 
 // IMDB API KEYS
 // Justin: k_jisxuuy3
@@ -171,6 +173,7 @@ function searchCall(requestUrl) {
                 movieName = data.results[i].title;
                 searchModal(data.results[i].title, data.results[i].image, nytRating)
             }
+            trackerBtn = $('.tracker-buttons')
             movieEl = $('.movie-poster');
         // !NOT BEING USED AT THE MOMENT! // 
             // var movieId = data.results[0].id
@@ -188,6 +191,10 @@ function searchCall(requestUrl) {
 
 // INITIALIZATION FUNCTION
 function init() {
+    var pulledStorage = JSON.parse(localStorage.getItem('trackerMovies'))
+    if (pulledStorage !== null) {
+        trackerMovies = pulledStorage
+    }
     for (var i = 0; i < curatedMovies.length; i++) {
         var movieDiv = $('<div>');
         movieDiv.addClass('movies');
@@ -206,6 +213,33 @@ function init() {
         mainDiv.append(movieDiv);
     }
 }
+
+function trackerInit() {
+        var pulledStorage = JSON.parse(localStorage.getItem('trackerMovies'))
+    if (pulledStorage !== null) {
+        trackerMovies = pulledStorage
+    }
+    
+    
+    for (var i = 0; i < trackerMovies.length; i++) {
+        var currentMovie = trackerMovies[i]
+        console.log(currentMovie[0])
+        var movieDiv = $('<div>');
+        movieDiv.addClass('movies');
+        var posterEl = $('<img>');
+        posterEl.addClass('movie-poster');
+        posterEl.attr("src", currentMovie[1]);
+        posterEl.attr("alt-text", currentMovie[0]);
+        var titleEl = $('<p>');
+        titleEl.addClass('movie-titles');
+        titleEl.text(currentMovie[0]);
+        movieDiv.append(posterEl);
+        movieDiv.append(titleEl);
+        mainDiv.append(movieDiv);
+}
+}
+
+
 
 // NYTIMES API CALL
 function nytCall(requestUrl) {
@@ -230,7 +264,14 @@ function nytCall(requestUrl) {
                         })}
 
 // INITIALIZES THE FRONT PAGE
-init();
+if (window.location.pathname == "/index.html") {
+    init();
+}
+
+if (window.location.pathname == "/Mymovies.html") {
+    trackerInit();
+}
+
 
 // THIS HAS TO BE HERE OTHERWISE IT DOESN'T SELECT THE MOVIES SINCE THEY'RE NOT GENERATED BEFORE THIS POINT
 var movieEl = $('.movie-poster');
@@ -314,4 +355,19 @@ searchBtn.on('click', function(event) {
     apiUrl = `https://imdb-api.com/en/API/SearchMovie/k_dh9vu8yk/${movieName}`
     $('input[name="movie-search"]').val('');
     searchCall(apiUrl);
+})
+
+trackerBtn.on('click', function(event) {
+    event.preventDefault();
+    var dataaa = $(this.parentNode.parentNode)
+    dataaa = dataaa.children();
+    console.log(dataaa[0].currentSrc)
+    console.log(dataaa[1].innerText)
+    var storeTitle = dataaa[1].innerText
+    var storePoster = dataaa[0].currentSrc
+    var storeItem = []
+    storeItem.push(storeTitle)
+    storeItem.push(storePoster)
+    trackerMovies.push(storeItem)
+    localStorage.setItem('trackerMovies', JSON.stringify(trackerMovies));
 })
