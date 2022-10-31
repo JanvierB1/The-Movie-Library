@@ -7,6 +7,8 @@ var bodyEl = $('body');
 var searchBtn = $('#search-button')
 var searchContainer = $('#search-modal-div')
 var trackerBtn = $('.tracker-buttons')
+var searchTracker = $('#full-modal')
+var removeBtn = $('#remove-button')
 var movieName
 var movieTitle
 var apiUrl = `https://imdb-api.com/en/API/SearchMovie/k_dh9vu8yk/${movieName}`
@@ -173,23 +175,11 @@ function searchCall(requestUrl) {
                 movieName = data.results[i].title;
                 searchModal(data.results[i].title, data.results[i].image, nytRating)
             }
-            trackerBtn = $('.tracker-buttons')
             movieEl = $('.movie-poster');
-        // !NOT BEING USED AT THE MOMENT! // 
-            // var movieId = data.results[0].id
-        //     fetch(`https://imdb-api.com/API/Ratings/k_jisxuuy3/${movieId}`)
-        //         .then(function (response) {
-        //             return response.json();
-        //         })
-        //         .then(function (ratingsData) {
-        //             console.log("vvv 2nd Data vvv")
-        //             console.log(data)
-        //             console.log(ratingsData);
-        //         })
         })
     }
 
-// INITIALIZATION FUNCTION
+// INITIALIZATION FUNCTION FOR HOME PAGE
 function init() {
     var pulledStorage = JSON.parse(localStorage.getItem('trackerMovies'))
     if (pulledStorage !== null) {
@@ -201,10 +191,10 @@ function init() {
         var posterEl = $('<img>');
         posterEl.addClass('movie-poster');
         posterEl.attr("src", curatedMovies[i].poster);
-        posterEl.attr("alt-text", curatedMovies[i].title);
-        posterEl.attr("rating", curatedMovies[i].rating);
-        posterEl.attr("imdb", curatedMovies[i].imdb);
-        posterEl.attr("rotten", curatedMovies[i].rotten);
+        posterEl.attr("alt", curatedMovies[i].title);
+        // posterEl.attr("rating", curatedMovies[i].rating);
+        // posterEl.attr("imdb", curatedMovies[i].imdb);
+        // posterEl.attr("rotten", curatedMovies[i].rotten);
         var titleEl = $('<p>');
         titleEl.addClass('movie-titles');
         titleEl.text(curatedMovies[i].title);
@@ -214,22 +204,23 @@ function init() {
     }
 }
 
+// INITIALIZATION FUNCTION FOR TRACKER PAGE
 function trackerInit() {
+        mainDiv[0].innerHTML = ""
         var pulledStorage = JSON.parse(localStorage.getItem('trackerMovies'))
     if (pulledStorage !== null) {
         trackerMovies = pulledStorage
     }
-    
-    
     for (var i = 0; i < trackerMovies.length; i++) {
         var currentMovie = trackerMovies[i]
-        console.log(currentMovie[0])
         var movieDiv = $('<div>');
         movieDiv.addClass('movies');
         var posterEl = $('<img>');
         posterEl.addClass('movie-poster');
+        // THESE ATTRIBUTES ARE ADDED TO BE ACCESSED LATER 
         posterEl.attr("src", currentMovie[1]);
-        posterEl.attr("alt-text", currentMovie[0]);
+        posterEl.attr("alt", currentMovie[0]);
+        posterEl.attr("index", i)
         var titleEl = $('<p>');
         titleEl.addClass('movie-titles');
         titleEl.text(currentMovie[0]);
@@ -239,7 +230,10 @@ function trackerInit() {
 }
 }
 
-
+// FUNCTION FOR CAPTURING THE NEW BUTTONS MADE
+function captureButtons() {
+    searchTracker = $('.tracker-buttons')
+}
 
 // NYTIMES API CALL
 function nytCall(requestUrl) {
@@ -263,14 +257,16 @@ function nytCall(requestUrl) {
                     }
                         })}
 
-// INITIALIZES THE FRONT PAGE
-if (window.location.pathname == "/index.html") {
-    init();
+// INITIALIZES THE PAGE 
+function pageLoad() {
+    var page = window.location.pathname.toLowerCase();
+    if (page.includes("index")) {
+        init();
+    } else if (page.includes("mymovies")) {
+        trackerInit();
+    }
 }
-
-if (window.location.pathname == "/Mymovies.html") {
-    trackerInit();
-}
+pageLoad();
 
 
 // THIS HAS TO BE HERE OTHERWISE IT DOESN'T SELECT THE MOVIES SINCE THEY'RE NOT GENERATED BEFORE THIS POINT
@@ -281,19 +277,20 @@ var movieEl = $('.movie-poster');
 // !!! THIS IS LIKELY WHERE WE WILL CAPTURE THE LOCAL STORAGE DATA FOR THE TRACKER BUTTON !!! //
 movieEl.on('click', function() {
     var mPoster = $(this).attr('src');
-    var mTitle = $(this).attr('alt-text');
+    var mTitle = $(this).attr('alt');
     var mIMDB = $(this).attr('imdb');
     var mRotten = $(this).attr('rotten');
+    var mIndex = $(this).attr('index')
     nytRating = ""
     movieTitle = mTitle;
     nytCall(`https://api.nytimes.com/svc/movies/v2/reviews/search.json?query=${mTitle}&api-key=52EHB16XvD2ETQbAtf2dd3sR3LC7drAM`);
     
-    openModal(mTitle, mPoster, nytRating, mIMDB, mRotten);
+    openModal(mTitle, mPoster, nytRating, mIMDB, mRotten, mIndex);
 })
 
 // MODAL OPENING FUNCTION
-// SET UP TO WORK WITH THE "DELAY" FUNCTION SO IT WON'T START UNTIL THE DATA IS RECIEVED FROM THE NYTCALL
-async function openModal(title, poster, rating, imdb, rotten) {
+// SET UP TO WORK WITH THE "DELAY" FUNCTION SO IT WON'T FINISH UNTIL THE DATA IS RECIEVED FROM THE NYTCALL
+async function openModal(title, poster, rating, imdb, rotten, index) {
     var modal1show = bodyEl[0].__x.unobservedData.showModal1
     bodyEl.attr('x-data', `{ showModal1: ${modal1show}, showModal2: true}`);
     var mtitleEl = $('#modal-title');
@@ -303,12 +300,17 @@ async function openModal(title, poster, rating, imdb, rotten) {
     var mRottenEl = $('#rotten-modal');
     mtitleEl.text(title);
     mposterEl.attr("src", poster);
+    mposterEl.attr("index", index)
     mIMDBEl.text(imdb);
     mRottenEl.text(rotten);
     mRatingEl.text('');
     // WAITS FOR THE NYT API CALL TO FINISH BEFORE CONTINUING 
     await delay();
-    mRatingEl.text('Age Rating: ' + nytRating);
+    if (nytRating != "") {
+        mRatingEl.text('Age Rating: ' + nytRating);
+    } else {
+        mRatingEl.text("Age Rating: Not Rated")
+    }
 }
 
 // SEARCH MODAL OPENING FUNCTION FOR WHEN SEARCH BUTTON IS USED
@@ -327,16 +329,17 @@ function searchModal(title, poster, rating) {
     var sratingEl = $('<p>');
     sposterEl.addClass('search-poster')
     sposterEl.attr("src", poster);
-    sposterEl.attr("alt-text", title);
+    sposterEl.attr("alt", title);
     sposterEl.attr("rating", rating);
     var sbuttonEl = $('<span>')
-    sbuttonEl.html(`<button type="button" class="tracker-buttons border border-green-500 bg-green-500 text-white rounded-md px-2 py-2 m-2 transition duration-500 ease select-none hover:bg-green-600 focus:outline-none focus:shadow-outline">Add to Tracker</button>`)
+    sbuttonEl.html(`<button type="button" class="border border-green-500 bg-green-500 text-white rounded-md px-2 py-2 m-2 transition duration-500 ease select-none hover:bg-green-600 focus:outline-none focus:shadow-outline tracker-buttons">Add to Tracker</button>`)
     movieDiv.append(sposterEl);
     textDiv.append(stitleEl);
     textDiv.append(sratingEl);
     textDiv.append(sbuttonEl);
     movieDiv.append(textDiv);
     searchContainer.append(movieDiv)
+    captureButtons();
 }
 
 // THIS FUNCTION DELAYS CONTINUING FOR A CERTAIN AMOUNT OF TIME. VERY USEFUL FOR THE FETCH CALL SINCE IT TAKES A SECOND AND IF IT DOESN'T WAIT THE VARIABLE DOESN'T GET CAPTURED
@@ -357,17 +360,54 @@ searchBtn.on('click', function(event) {
     searchCall(apiUrl);
 })
 
+// FUNCTION FOR TRACKER BUTTON CLICK EVENT
 trackerBtn.on('click', function(event) {
     event.preventDefault();
-    var dataaa = $(this.parentNode.parentNode)
-    dataaa = dataaa.children();
-    console.log(dataaa[0].currentSrc)
-    console.log(dataaa[1].innerText)
-    var storeTitle = dataaa[1].innerText
-    var storePoster = dataaa[0].currentSrc
+    var trackerData = $(this.parentNode.parentNode)
+    trackerData = trackerData.children();
+    var storeTitle = trackerData[1].innerText
+    var storePoster = trackerData[0].currentSrc
     var storeItem = []
     storeItem.push(storeTitle)
     storeItem.push(storePoster)
     trackerMovies.push(storeItem)
     localStorage.setItem('trackerMovies', JSON.stringify(trackerMovies));
+})
+
+// CAPTURES NEW BUTTONS CREATED 
+$('#search-modal-container').on('shown.bs.modal', function (event) {
+    $(".tracker-buttons").trigger("click");  
+});
+
+// FUNCTION FOR TRACKER BUTTON ON SEARCH PAGE CLICK EVENT
+searchTracker.on('click', function(event) {
+    event.preventDefault();
+    var element = event.target
+    if (element.matches('button')) {
+        var searchData = element.parentNode.parentNode.parentNode 
+        searchData = searchData.children[0];
+        var searchTitle = searchData.alt
+        var searchPoster = searchData.src
+        var searchItem = []
+        searchItem.push(searchTitle)
+        searchItem.push(searchPoster)
+        trackerMovies.push(searchItem)
+        localStorage.setItem('trackerMovies', JSON.stringify(trackerMovies));
+    }
+
+})
+
+// FUNCTION FOR REMOVE BUTTON ON TRACKER PAGE
+removeBtn.on('click', function(event) {
+    event.preventDefault();
+    var modal1remove = bodyEl[0].__x.unobservedData.showModal1
+    bodyEl.attr('x-data', `{ showModal1: ${modal1remove}, showModal2: false}`);
+    var removeData = $(this.parentNode.parentNode)
+    removeData = removeData.children();
+    var removeIndex = removeData[0].attributes[4].value;
+    if (removeIndex > -1) {
+        trackerMovies.splice(removeIndex, 1)
+    }
+    localStorage.setItem('trackerMovies', JSON.stringify(trackerMovies));
+    window.location.reload();
 })

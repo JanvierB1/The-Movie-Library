@@ -89,6 +89,7 @@ margin-bottom: 10px;
 /* Text below the title on the modal */
 .modal-below-text {
 padding: 3px;
+height: 30px;
 }
 
 /* For centering all the items at the bottom of the modal  */
@@ -99,6 +100,7 @@ align-items: center;
 justify-content: center;
 }
 
+/* CONTAINER FOR THE SEARCH MODAL */
 #search-modal-div {
 display: flex;
 flex-direction: row;
@@ -106,6 +108,7 @@ flex-wrap: wrap;
 align-content: space-evenly;
 }
 
+/* CONTAINER FOR THE MOVIES IN THE SEARCH MODAL */
 .search-movies {
 display: inline-block;
 position:static;
@@ -119,11 +122,13 @@ font-weight: bold;
 text-align: center;
 }
 
+/* POSTERS IN THE SEARCH MODAL  */
 .search-poster {
 height: 225px;
 width: 150px;
 }
 
+/* CONTAINER FOR THE ITEMS BELOW THE MODAL POSTER  */
 .below-search-item {
 display: flex;
 flex-direction: column;
@@ -133,10 +138,17 @@ background-color: white;
 height:fit-content;
 }
 
+/* CONTAINER FOR ENTIRE SEARCH MODAL  */
 #search-modal-container {
 height: fit-content;
 }
 
+/* TRACKER BUTTONS */
 .tracker-buttons {
 align-self:flex-end;
+}
+
+/* MODAL CONTAINER (NOT SEARCH) */
+.modal-container {
+  height: 739px;
 }
