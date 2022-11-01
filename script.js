@@ -192,9 +192,6 @@ function init() {
         posterEl.addClass('movie-poster');
         posterEl.attr("src", curatedMovies[i].poster);
         posterEl.attr("alt", curatedMovies[i].title);
-        // posterEl.attr("rating", curatedMovies[i].rating);
-        // posterEl.attr("imdb", curatedMovies[i].imdb);
-        // posterEl.attr("rotten", curatedMovies[i].rotten);
         var titleEl = $('<p>');
         titleEl.addClass('movie-titles');
         titleEl.text(curatedMovies[i].title);
@@ -227,8 +224,7 @@ function trackerInit() {
         movieDiv.append(posterEl);
         movieDiv.append(titleEl);
         mainDiv.append(movieDiv);
-}
-}
+}}
 
 // FUNCTION FOR CAPTURING THE NEW BUTTONS MADE
 function captureButtons() {
@@ -274,7 +270,7 @@ var movieEl = $('.movie-poster');
 // ...
 
 // CLICK EVENT FOR MOVIES ON MAIN PAGE
-// !!! THIS IS LIKELY WHERE WE WILL CAPTURE THE LOCAL STORAGE DATA FOR THE TRACKER BUTTON !!! //
+// !!! THIS IS WHERE WE WILL CAPTURE THE LOCAL STORAGE DATA FOR THE TRACKER BUTTON !!! //
 movieEl.on('click', function() {
     var mPoster = $(this).attr('src');
     var mTitle = $(this).attr('alt');
@@ -314,7 +310,7 @@ async function openModal(title, poster, rating, imdb, rotten, index) {
 }
 
 // SEARCH MODAL OPENING FUNCTION FOR WHEN SEARCH BUTTON IS USED
-// !!! THIS IS LIKELY WHERE WE WILL CAPTURE THE LOCAL STORAGE DATA FOR THE TRACKER BUTTON !!! //
+// !!! THIS IS WHERE WE WILL CAPTURE THE LOCAL STORAGE DATA FOR THE TRACKER BUTTON !!! //
 function searchModal(title, poster, rating) {
     var modal2show = bodyEl[0].__x.unobservedData.showModal2
     bodyEl.attr('x-data', `{ showModal1: true, showModal2: ${modal2show}}`)
