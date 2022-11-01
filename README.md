@@ -2,7 +2,7 @@
 
 ## **Description**
 
-TEXT
+This project is a Movie Library that can be used to track movies you've seen as well as look up new movies and get their age rating. This was our first major project in the class covering everything we learned from HTML up to server side APIs. This project includes vanilla JS, HTML and CSS as well as Tailwind CSS, Alpine and jquery. 
 
 ---
 
@@ -37,12 +37,17 @@ TEXT
 
 ## **Usage & Live Link**
 
-To view/use this project, it can be accessed by going to []().
+To view/use this project, it can be accessed by going to [https://janvierb1.github.io/The-Movie-Library/](https://janvierb1.github.io/The-Movie-Library/). 
 
 ---
 
 ## **Credits**
 
-- 
+- Justin Watkins
+- Zarrar Raja
+- Daniel Miller
+- Melina Morales
+- Joseph Sandoval
+- Janiver Barreto
 
 ---

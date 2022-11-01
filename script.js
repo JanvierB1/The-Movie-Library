@@ -256,7 +256,7 @@ function nytCall(requestUrl) {
 // INITIALIZES THE PAGE 
 function pageLoad() {
     var page = window.location.pathname.toLowerCase();
-    if (page.includes("index")) {
+    if (page.includes("index") || (!page.includes("mymovies")) ) {
         init();
     } else if (page.includes("mymovies")) {
         trackerInit();
