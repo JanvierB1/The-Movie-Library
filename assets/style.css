@@ -89,6 +89,7 @@ margin-bottom: 10px;
 /* Text below the title on the modal */
 .modal-below-text {
 padding: 3px;
+padding-bottom: 10px;
 height: 30px;
 }
 
@@ -151,4 +152,9 @@ align-self:flex-end;
 /* MODAL CONTAINER (NOT SEARCH) */
 .modal-container {
   height: 739px;
+}
+
+/* MARGIN FOR RATING TEXT ON TRACKER PAGE */
+#age-rating {
+  margin-bottom: 10px;
 }
