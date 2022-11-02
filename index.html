@@ -9,6 +9,7 @@
     <link rel="Stylesheet" href="./assets/style.css">
     <title>The Movie Library</title>
 </head>
+<!-- Modal1 = search modal, Modal2 = main modal when clicking movies -->
 <body x-data="{ showModal1: false, showModal2: false}" :class="{'overflow-y-hidden': showModal1 || showModal2}">
     <div class="min-h-full">
         <nav class="bg-blue-800">
@@ -75,7 +76,7 @@
                 </div>
               </div>
             </div>
-    <!-- TESTING MODAL CODE -->
+    <!-- START OF MAIN MODAL CODE -->
     <!-- Modal2 -->
     <div
     class="fixed inset-0 w-full h-full z-20 bg-black bg-opacity-50 duration-300 overflow-y-auto"
@@ -127,7 +128,7 @@
       </div>
     </div>
   </div>
-  <!-- END OF MODAL CODE -->
+  <!-- END OF MAIN MODAL CODE -->
   <!-- /End replace -->
 
 
