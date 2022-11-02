@@ -6,6 +6,7 @@
 var mainDiv = $('#main-div');
 var bodyEl = $('body');
 var searchBtn = $('#search-button')
+var msearchBtn = $('#mobile-search-button')
 var searchContainer = $('#search-modal-div')
 var trackerBtn = $('.tracker-buttons')
 var searchTracker = $('#full-modal')
@@ -347,6 +348,20 @@ searchBtn.on('click', function(event) {
     // ...
     // RESETS THE SEARCH BOX VALUES
     $('input[name="movie-search"]').val('');
+    searchCall(apiUrl);
+})
+
+// FUNCTION FOR THE MOBILE SEARCH BUTTON CLICK EVENT
+msearchBtn.on('click', function(event) {
+    event.preventDefault();
+    // GRABS THE SEARCH BAR DATA
+    movieName = $('input[name="mobile-movie-search"]').val().trim();
+    // SETS THE API URL TO THE GRABBED VALUE
+    // SET YOUR API KEY HERE. REPLACE "k_855f05kw" WITH YOUR API KEY. --SEARCHKEY: IMDBKEY
+    apiUrl = `https://imdb-api.com/en/API/SearchMovie/k_855f05kw/${movieName}`
+    // ...
+    // RESETS THE SEARCH BOX VALUES
+    $('input[name="mobile-movie-search"]').val('');
     searchCall(apiUrl);
 })
 
