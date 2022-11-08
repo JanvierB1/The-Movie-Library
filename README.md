@@ -4,6 +4,14 @@
 
 This project is a Movie Library that can be used to track movies you've seen as well as look up new movies and get their age rating. This was our first major project in the class covering everything we learned from HTML up to server side APIs. This project includes vanilla JS, HTML and CSS as well as Tailwind CSS, Alpine and jquery. 
 
+Technologies Used: HTML, CSS, JavaScript, JQuery, IMDB API, NYTimes API
+
+API 1: IMDB
+Where it's used: When searching for movies it makes an API call to return the searched movies. The posters and titles are pulled and populated.
+
+API 2: New York Times API (Movie Reviews)
+Where it's used: When clicking on a movie on the index page or "My Movies" page the modal that opens display the age rating. This is an API call each time. 
+
 ---
 
 ## **Project Requirements**
